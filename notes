@@ -1,0 +1,121 @@
+Multitasking
+------------
+- multitasking allows several activities to occur concurrently on the computer
+    - process based multitasking
+    - thread based multitasking
+
+- process based multitasking
+    - allows processes (i.e programs) to concurrently on the computer.
+    eg: Running the Ms Paint while also working with the word processor.
+
+
+Thread Based multitasking
+
+allows parts of the same program to run concurrently on the computer.
+eg: Ms Word that is printing and formatting text at the same time.
+
+Threads vs Process:
+- two threads share the same address space
+- context switching between threads is usually less expensive than between processes
+- the cost of communication between threads is relatively low
+
+why multithreading?
+
+- In a single-threaded environment, only one task at a time can be performed.
+- CPU cycles are wasted, for example, when waiting for user input.
+- Multitasking allows idle CPU time to be put to good use.
+
+Threads:
+- A thread is an independent sequential path of execution within a program.
+- Many threads can run concurrently within a program.
+- At runtime, threads in a program exist in a common memory space, and can, therefore share both
+data and code (i.e., they are lightweight compared to processes).
+- They also share the process running the program.
+
+- 3 important concepts related to Multithreading in Java
+    - Creating threads and providing the code that gets executed by a thread.
+    - Accessing common data and code through synchronization.
+    - Transitioning between thread states.
+
+Thread Creation:
+    - A thread in Java is represented by a object of Thread class.
+    - thread can be created in one of two ways:
+        - Implementing the Runnable interface
+        - Extending the Thread class
+
+
+Two types of threads:
+    - Main thread
+    - Daemon thread
+
+- Multiple interfaces implementation is supported in Java
+- Multiple extends are not supported
+
+Synchronization:
+    - threads share the same memory space, i.e, they can share the resources (objects)
+    - however, there are critical situations where it is desirable that only one thread at a time
+        has access to a shared resource.
+    - race conditions
+
+Synchronized methods:
+    - while a thread is inside a synchronized method of an object, all other threads that wish to execute
+        this synchronized method or any other synchronized method of the object will have to wait.
+    - this restriction does not apply to the thread that already has the lock and is executing a
+        synchronized method of the object.
+    - such a method can invoke synchronized methods of the object without being blocked.
+    - the non-synchronized methods of the object can always be called at any time by any thread.
+
+Rules of synchronization:
+    - a thread must acquire the object lock associated with a shared resource before it can enter the
+        shared resource.
+    - the runtime system ensures that no other thread can enter a shared resource if another thread
+        already holds a object lock associated with it.
+    - if a thread cannot immediately acquire the object lock, it is blocked, i.e, it must wait for the
+        lock to become available.
+    - when a thread exits a shared resource, the runtime system ensures that the object lock is relinquished.
+        If another thread is waiting for this object lock, it can try to acquire the lock in order to gain
+        access to the shared resource.
+    - it should be made clear that programs should not make any assumptions about the order in which
+        threads are granted ownership of a lock.
+
+    - static synchronized methods:
+        - a thread acquiring the lock of a class to execute a static synchronized method has no effect on
+            any thread acquiring the lock on any object of the class to execute a synchronized instance method.
+        - in other words, synchronization of static methods in a class is independent from the synchronization
+            of instance methods on objects of the class.
+        - a subclass decides whether the new definition of an inherited synchronized method will remain
+            synchronized in the subclass.
+    - race condition
+        - it occurs when two or more threads simultaneously update the same value(stackTopIndex) and as a
+            consequence, leave the value in an undefined or inconsistent state.
+
+
+    - synchronized blocks:
+        - whereas execution of synchronized methods of an object is synchronized on the lock of the object,
+            the synchronized block allow execution of arbitrary code of the synchronized on the lock of an
+            arbitrary object.
+        - the general form of the synchronized statement is as follows:
+            synchronized(object ref expression) { <code block> }
+        - the object ref expression must evaluate to a non-null reference value, otherwise a
+            NullPointerException is thrown.
+
+    - thread safety
+        - its the term used to describe the design of classes that ensure that the state of their objects
+            is always consistent, even when the objects are used concurrently by multiple threads.
+            eg - StringBuffer
+
+    - waiting and notifying
+        - a thread in the Waiting-for-notification state can be awakened by the occurrence of anyone
+            of these three incidents:
+
+- Thread Priorities:
+    - Threads are assigned priorities that the thread scheduler can use to determine how the threads
+        will be scheduled
+    - thread scheduler can use threadypriorities to determine which thread gets to run.
+    - Thread.MAX_PRIORITY is 10
+    - Thread.MIN_PRIORITY is 1
+    - Thread.NORM_PRIORITY is 5
+
+- Thread scheduler
+    - Preemptive scheduling
+    - time sliced or round-robin scheduling
