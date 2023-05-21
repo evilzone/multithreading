@@ -1,4 +1,4 @@
-class Hi {
+class Hi extends Thread {
     public void run() {
         try {
             for(int i = 1; i <= 5; i++) {
@@ -8,8 +8,7 @@ class Hi {
         } catch (Exception e) { }
     }
 }
-
-class Hello {
+class Hello extends Thread {
     public void run() {
         try {
             for(int i = 1; i <= 5; i++) {
@@ -26,7 +25,7 @@ public class ThreadDemo {
         Hi hi = new Hi();
         Hello hello = new Hello();
 
-        hi.run();
-        hello.run();
+        hi.start();
+        hello.start();
     }
 }
