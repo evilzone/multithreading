@@ -1,0 +1,29 @@
+public class Q {
+    int num = 0;
+    boolean isSet = false;
+
+    public synchronized void put(int num) throws InterruptedException {
+
+        while(isSet) {
+            wait();
+        }
+
+        System.out.println("put num = " + num);
+
+        this.num = num;
+        isSet = true;
+        notify();
+    }
+
+    public synchronized void get() throws InterruptedException {
+
+        while(!isSet) {
+            wait();
+        }
+
+        System.out.println("get num = " + num);
+
+        isSet = false;
+        notify();
+    }
+}
