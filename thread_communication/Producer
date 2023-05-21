@@ -1,0 +1,20 @@
+public class Producer implements Runnable {
+    Q q;
+    public Producer(Q q) {
+        this.q = q;
+        Thread thread = new Thread(this, "Producer");
+        thread.start();
+    }
+
+    public void run() {
+        int i = 0;
+        while(true) {
+            try {
+                q.put(i++);
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
