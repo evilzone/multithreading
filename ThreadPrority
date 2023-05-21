@@ -1,0 +1,56 @@
+public class ThreadPrority {
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread1 = new Thread(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Thread1");
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "thread1");
+
+        Thread thread2 = new Thread(() -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Thread2");
+                try {
+                    Thread.sleep(100);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "thread2");
+
+        thread1.setPriority(1);
+        thread2.setPriority(10);
+
+
+        System.out.println("t1 priority: " + thread1.getPriority());
+        System.out.println("t2 priority: " + thread2.getPriority());
+
+
+        // Instantiating two thread classes
+        thread1.start();
+        thread2.start();
+
+        System.out.println("t1.isalive() " + thread1.isAlive());
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println("t1.isalive() " + thread1.isAlive());
+
+        System.out.println("t1 name: " + thread1.getName());
+        System.out.println("t2 name: " + thread2.getName());
+
+        thread1.setName("threadOne");
+        thread2.setName("threadTwo");
+
+        System.out.println("t1 name: " + thread1.getName());
+        System.out.println("t2 name: " + thread2.getName());
+
+        System.out.println("Bye!");
+    }
+}
