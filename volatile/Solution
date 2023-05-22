@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+
+        ThreadVolatile proc = new ThreadVolatile();
+        Thread thread = new Thread(proc);
+        thread.start();
+
+        Scanner in = new Scanner(System.in);
+        in.nextLine();
+
+        proc.shutDown();
+
+    }
+}
