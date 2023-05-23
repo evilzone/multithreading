@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Processor {
+
     public void producer() throws InterruptedException {
         synchronized(this) {
             System.out.println("Producer thread running ...");
@@ -8,6 +9,7 @@ public class Processor {
             System.out.println("Resumed ...");
         }
     }
+    
     public void consumer() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         Thread.sleep(2000);
