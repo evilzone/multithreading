@@ -51,9 +51,7 @@ public class App {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
-            public void run() {
-                app.process();
-            }
+            public void run() { app.process(); }
         });
 
         Thread thread2 = new Thread(new Runnable() {
