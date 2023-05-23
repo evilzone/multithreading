@@ -12,7 +12,5 @@ public class Runner extends Thread {
                 throw new RuntimeException(e);
             }
         }
-
     }
-
 }
