@@ -1,0 +1,22 @@
+import java.util.concurrent.CountDownLatch;
+
+public class Processor implements Runnable {
+
+    CountDownLatch countDownLatch;
+
+    public Processor(CountDownLatch countDownLatch) {
+        this.countDownLatch = countDownLatch;
+    }
+
+    public void run() {
+        System.out.println("starting thread...");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        countDownLatch.countDown();
+    }
+}
