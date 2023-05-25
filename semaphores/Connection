@@ -1,0 +1,39 @@
+import java.util.concurrent.Semaphore;
+
+public class Connection {
+    private static final Connection instance = new Connection();
+    private final Semaphore semaphore = new Semaphore(10);
+    private int connections = 0;
+    private Connection() { }
+
+    public static Connection getInstance() {
+        return instance;
+    }
+    public void doConnect() {
+        try {
+            semaphore.acquire();
+            connect();
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
+        }
+    }
+    private void connect() {
+
+        synchronized(this) {
+            connections++;
+            System.out.println("current connections " + connections);
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        synchronized(this) {
+            connections--;
+        }
+    }
+}
